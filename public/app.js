@@ -293,7 +293,12 @@ function msgEl(m) {
       h('button', { class: 'btn text small', onclick: () => { tgt(m.id).hidden = false; changed(); rerenderMsg(m); } }, 'Einblenden')));
     head.querySelector('.tools .icon-btn').remove();
   } else {
-    for (const b of m.blocks) el.append(blockEl(b));
+    // Filter „Nur kommentierte“: Hat nur ein Block einen Kommentar, werden nur diese Blöcke gezeigt.
+    const onlyBlocks = st.only && !count(m.id);
+    for (const b of m.blocks) {
+      if (onlyBlocks && !(st.msgIds.get(m.id) || []).some((id) => (id === b.id || id.startsWith(b.id + '#')) && count(id))) continue;
+      el.append(blockEl(b));
+    }
     if (st.raw) {
       const d = h('details', { class: 'raw' }, h('summary', {}, 'Rohdaten (JSONL)'));
       d.addEventListener('toggle', async () => {
@@ -328,7 +333,7 @@ function renderChat() {
   const inner = h('div', { class: 'chat-inner' });
   let group = null, groupInner = null, shown = 0;
   for (const m of st.chat.messages) {
-    if (st.only && !msgCount(m.id) && !(tgt(m.id) || {}).hidden) continue;
+    if (st.only && !msgCount(m.id)) continue;
     shown++;
     const el = msgEl(m);
     if (m.sidechain) {

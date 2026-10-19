@@ -1,0 +1,33 @@
+# Nutzerdaten: importierte Chats, Kommentare, Anhänge (können sensible Inhalte enthalten)
+/data/
+
+# Vorlesungsmaterial und Arbeitsordner, nicht Teil der App
+/docs/
+/analyse/
+/raw/
+/kurs/
+
+# Abhängigkeiten und Build-Ausgaben
+node_modules/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporäre Dateien des Servers (atomares Schreiben)
+*.tmp
+
+# Lokale Claude-Code-Einstellungen
+.claude/settings.local.json
+
+# Betriebssystem und Editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Lokale Umgebungsvariablen
+.env
+.env.*

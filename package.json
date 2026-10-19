@@ -1,0 +1,11 @@
+{
+  "name": "mostly-wise",
+  "version": "1.0.0",
+  "description": "Lokaler Viewer zum Diskutieren und Kommentieren von Claude-Code-Chats",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "open": "node server.js --open"
+  },
+  "engines": { "node": ">=18" }
+}
